@@ -1,0 +1,13 @@
+<a [routerLink]="['/browse']">Browse</a> | <a [routerLink]="['/listings']">Listings</a> | <a href="/logout">Logout</a>
+
+
+<div class="list" *ngFor="let bike of allBikes">
+    <h4>{{bike.title}}</h4>
+    <img src="{{bike.imgurl}}" alt="picture of a bike">
+    <p>{{bike.description}}</p>
+    <p>{{bike.price}}</p>
+    <p>{{bike.location}}</p>
+    <button (click)="delete(bike._id)"type="button" name="button" *ngIf="bike._user == userId"> Delete</button>
+    <button (click)="contact(bike._user)" type="button" name="button" *ngIf="bike._user != userId"> Contact Seller</button>
+
+</div>

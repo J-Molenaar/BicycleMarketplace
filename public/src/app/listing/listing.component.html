@@ -1,0 +1,95 @@
+<a [routerLink]="['/browse']">Browse</a> |
+<a [routerLink]="['/listings']">Listings</a> |
+<a href="/logout">Logout</a>
+
+<div id="createBike">
+    <form (submit)="newBicycle()" #createBike="ngForm">
+    Image URL:<br><input
+      type="text"
+      name="imgurl"
+      [(ngModel)]="bicycle.imgurl"
+      #imgurl = "ngModel"
+      required
+    ><br><br>
+    Title:<br><input
+      type="text"
+      name="title"
+      [(ngModel)]="bicycle.title"
+      #title = "ngModel"
+      required
+      minlength = "2"
+    ><br><br>
+    Description:<br><textarea
+      name="description"
+      [(ngModel)]="bicycle.description"
+      #description = "ngModel"
+      required
+      maxlength = "200"
+      col="40"
+      row="4"
+    ></textarea><br><br>
+    Price:<br><input
+      type="number"
+      step="0.01"
+      name="price"
+      [(ngModel)]="bicycle.price"
+      #price = "ngModel"
+      required
+      min="1"
+    ><br><br>
+    Location:<br><input
+      type="text"
+      name="location"
+      [(ngModel)]="bicycle.location"
+      #location = "ngModel"
+      required
+    ><br><br>
+    <input
+      type="submit"
+      value="Create"
+      [disabled]="!createBike.form.valid"
+    >
+  </form>
+</div>
+
+<br>
+<br>
+
+
+
+<form class="update" *ngFor="let bike of myBikes; let idx = index" (submit)="update(idx)">
+    <div class="list" >
+        <h4>{{bike.title}}</h4>
+        <input
+            type="text"
+            name="title"
+            [(ngModel)]="bike.title"
+            #title = "ngModel"
+            value="{{bike.title}}">
+        <input
+            type="text"
+            name="description"
+            [(ngModel)]="bike.description"
+            #description = "ngModel"
+            value="{{bike.description}}">
+        <input
+            type="number"
+            name="price"
+            [(ngModel)]="bike.price"
+            #price = "ngModel"
+            value="{{bike.price}}">
+        <input
+            type="text"
+            name="location"
+            [(ngModel)]="bike.location"
+            #location = "ngModel"
+            value="{{bike.location}}">
+        <input
+            type="submit"
+            value="Update"
+        >
+        <button (click)="delete(bike._id)"type="button" name="button" *ngIf="bike._user == userId"> Delete</button>
+
+        <img src="{{bike.imgurl}}" alt="picture of a bike">
+    </div>
+</form>
